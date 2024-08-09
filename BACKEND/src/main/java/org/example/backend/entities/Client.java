@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -14,7 +17,10 @@ import java.util.List;
 @Entity
 
 @DiscriminatorValue("CLIENT")
-public class Client extends Compte {
+public class Client  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 
     private String prenom;
@@ -24,12 +30,8 @@ public class Client extends Compte {
     @OneToOne
     private Adresse adresse;
 
-    @OneToMany(mappedBy = "client")
-    private List<Commande> commandes;
-    @Override
-    public void setRoles(Role1 roles) {
-        super.setRoles(Role1.CLIENT);
-    }
+
+
 
 
 }

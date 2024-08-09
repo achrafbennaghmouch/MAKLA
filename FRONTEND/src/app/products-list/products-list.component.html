@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <h5>Products List</h5>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>DateCreation</th>
+              <th> Categorie </th>
+              <th> Restaurant </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products" >
+              <td>{{product.nameProduct}}</td>
+              <td>{{product.priceProduct}}</td>
+              <td>{{product.category.nom}}</td>
+              <td>{{product.restau.nameRestau}}</td>
+              <td>
+                <a *ngIf="authservice.isAdmin()" class="btn btn-success" [routerLink]="['/edit-product/',product.idProduct]">Edit</a>
+              </td>
+              <td> <a *ngIf="authservice.isAdmin()" class="btn btn-danger" (click)="deleteProduct(product)">Delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+  </div>

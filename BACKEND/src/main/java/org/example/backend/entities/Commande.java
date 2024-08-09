@@ -16,11 +16,16 @@ public class Commande {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "commande_id", nullable = false)
     private long id;
-    private long PrixTotal;
-    private long Quantite_commande;
+    private int prix_total;
+    private int Quantite_commande;
+
+    public Commande(int prix_total, int quantite_commande) {
+        this.prix_total = prix_total;
+        Quantite_commande = quantite_commande;
+    }
 
     @ManyToOne
-    private Client client;
+    private UserEntity user;
 
     @OneToMany(mappedBy = "commande")
     private List<LigneCommande> lignesCommande;

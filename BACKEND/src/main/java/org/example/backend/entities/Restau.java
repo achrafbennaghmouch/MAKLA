@@ -5,25 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 
-public class Restau extends Compte {
-
-    private Long restauId;
+public class Restau  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nameRestau;
     @OneToMany(mappedBy = "restau")
-  //  @JsonIgnore
     private List<Product> products;
    @OneToOne
     private Adresse adresseRestau;
 
-    @Override
-    public void setRoles(Role1 roles) {
-        super.setRoles(Role1.RESTAU);
-    }
+
 }

@@ -1,13 +1,14 @@
 package org.example.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.example.backend.entities.LigneCommande;
+import org.example.backend.entities.Restau;
 
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,20 +19,22 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProduct;
-    @NotNull
     private String nameProduct;
 
     private Double priceProduct;
 
     @ManyToOne
+    @JsonIgnore
     private Restau restau;
 
-    @OneToMany(mappedBy = "produit")
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<LigneCommande> lignesCommande;
 
 
 
-   @ManyToOne
+    @ManyToOne
+    @JsonIgnore
     private Category category;
 
 

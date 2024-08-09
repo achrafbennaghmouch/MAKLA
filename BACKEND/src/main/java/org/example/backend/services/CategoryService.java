@@ -1,5 +1,6 @@
 package org.example.backend.services;
 import org.example.backend.entities.Category;
+import org.example.backend.entities.Product;
 import org.example.backend.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,26 @@ public class CategoryService {
         return categoryRepository.findById(id).orElse(null);
     }
 
-    public Category createCategory(Category category) {
+    public Category addCategory(Category category) {
         return categoryRepository.save(category);
     }
 
     public Category updateCategory(long id, Category category) {
-        return categoryRepository.save(category);
+        Category existingCategory = categoryRepository.findById(id).orElse(null);
+        if (existingCategory != null) {
+            existingCategory.setNom(category.getNom());
+            existingCategory.setDescription(category.getDescription());
+            return categoryRepository.save(existingCategory);
+        } else {
+            return null;
+        }
     }
 
     public void deleteCategory(long id) {
         categoryRepository.deleteById(id);
+    }
+    public List<Product> getAllProductsFromCategory(long id) {
+        Category category = getCategoryById(id);
+        return category.getProducts();
     }
 }
